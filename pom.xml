@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.9</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.ttknp</groupId>
+    <artifactId>api-jasper-using-spring-boot-security-crud-mysql-for-angular</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>api-jasper-using-spring-boot-security-crud-mysql-for-angular</name>
+    <description>api-jasper-using-spring-boot-security-crud-mysql-for-angular</description>
+    <url/>
+    <licenses>
+        <license/>
+    </licenses>
+    <developers>
+        <developer/>
+    </developers>
+    <scm>
+        <connection/>
+        <developerConnection/>
+        <tag/>
+        <url/>
+    </scm>
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--
+              **** importance
+              import custom module/dependency
+              if you do not you can only access the class but not dependency of child module !!!
+              and don't forget import your jar to main project if you do not it can't see jar target !!!
+         -->
+        <dependency>
+            <groupId>com.ttknp</groupId>
+            <artifactId>jdbc-custom-service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ttknp</groupId>
+            <artifactId>valiadation-custom-service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ttknp</groupId>
+            <artifactId>security-custom-service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Why i have to import again!!! fix java.lang.ClassNotFoundException: javax.xml.bind.DatatypeConverter -->
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+        <!--
+               Note, In Jasper Studio you have to use the same version of dependency
+               For report as word , excel , html ,... -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>7.0.0</version>
+        </dependency>
+        <!-- For report as pdf -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports-pdf</artifactId>
+            <version>7.0.3</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <!--<configuration>
+                    <jvmArguments>-Xmx512m -Dlogging.level.org.springframework=DEBUG</jvmArguments>
+                </configuration>-->
+            </plugin>
+
+            <!-- **** importance for build jar with multiple modules -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>3.1.3</version>
+                <executions>
+
+                    <execution>
+                        <id>jdbc-custom-service</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>com.ttknp</groupId>
+                            <artifactId>jdbc-custom-service</artifactId>
+                            <version>0.0.1-SNAPSHOT</version>
+                            <packaging>jar</packaging>
+                            <file>${basedir}/libs/jdbc-custom-service-0.0.1-SNAPSHOT.jar</file>
+                        </configuration>
+                    </execution>
+
+
+                    <!-- in this module doesn't call but jdbc-custom-service use so it have to import -->
+                    <execution>
+                        <id>valiadation-custom-service</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>com.ttknp</groupId>
+                            <artifactId>valiadation-custom-service</artifactId>
+                            <version>0.0.1-SNAPSHOT</version>
+                            <packaging>jar</packaging>
+                            <file>${basedir}/libs/valiadation-custom-service-0.0.1-SNAPSHOT.jar</file>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>security-custom-service</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>com.ttknp</groupId>
+                            <artifactId>security-custom-service</artifactId>
+                            <version>0.0.1-SNAPSHOT</version>
+                            <packaging>jar</packaging>
+                            <file>${basedir}/libs/security-custom-service-0.0.1-SNAPSHOT.jar</file>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
