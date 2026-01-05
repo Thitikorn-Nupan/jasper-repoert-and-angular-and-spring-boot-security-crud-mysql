@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
+
 export class AppComponent {
-  title = 'ui-angular-with-boostrap-for-jasper-using-spring-boot-security';
+
 }

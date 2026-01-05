@@ -1,0 +1,13 @@
+<div class="card p-3 text-center">
+  <ng-container *ngIf="!loginResponse">
+    <login
+      [loginRequest]="loginRequest"
+      (loginResponse)="onLoginResponseEmitter($event)">
+    </login>
+  </ng-container>
+  <ng-container *ngIf="loginResponse">
+    <program
+    [loginResponse]="loginResponse">
+    </program>
+  </ng-container>
+</div>

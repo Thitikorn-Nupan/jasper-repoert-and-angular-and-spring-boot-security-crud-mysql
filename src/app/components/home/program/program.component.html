@@ -1,0 +1,45 @@
+<div class="dropdown">
+  <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">Sorting By Brand</button>
+  <ul class="dropdown-menu">
+    <li *ngFor="let brand of brands">
+      <button class="dropdown-item" type="button" (click)="onSelectBrand(brand)">{{ brand }}</button>
+    </li>
+  </ul>
+  <button class="btn btn-dark m-lg-2" type="button" (click)="onLogout()">Logout</button>
+  <div class="btn-group m-lg-2" role="group" aria-label="Basic mixed styles example">
+    <button type="button" class="btn btn-danger" (click)="onDownloadFile('PDF')">PDF</button>
+    <button type="button" class="btn btn-success" (click)="onDownloadFile('XLSX')">EXCEL</button>
+  </div>
+</div>
+<div class="w-75 container">
+  <table class="table  mt-2">
+    <thead class="table-dark">
+    <tr>
+      <th scope="col">GID</th>
+      <th scope="col">MODEL</th>
+      <th scope="col">BRAND</th>
+      <th scope="col">PRICE (THB)</th>
+      <th scope="col">AMOUNT (PCS)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let gadget of gadgets ">
+      <th scope="row">{{ gadget.gid }}</th>
+      <td>{{ gadget.model }}</td>
+      <td>{{ gadget.brand }}</td>
+      <td>{{ gadget.price }}</td>
+      <td>{{ gadget.amount }}</td>
+    </tr>
+    </tbody>
+    <tfoot *ngIf="total">
+    <tr>
+      <th colspan="2">Total Amount</th>
+      <td colspan="3">{{ total.amount }} PCS</td>
+    </tr>
+    <tr>
+      <th colspan="2">Total Price</th>
+      <td colspan="3">{{ total.price | currency : 'THB' }}</td>
+    </tr>
+    </tfoot>
+  </table>
+</div>

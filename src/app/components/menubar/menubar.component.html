@@ -1,0 +1,7 @@
+<ul class="nav nav-tabs justify-content-center">
+  <ng-container *ngFor="let routerLink of routerLinks; let index = index">
+    <li class="nav-item">
+      <a [attr.class]="(id === index) ? 'nav-link active' : 'nav-link'" (click)="onClick(routerLink.id)" [routerLink]="routerLink.route">{{routerLink.label}}</a>
+    </li>
+  </ng-container>
+</ul>

@@ -1,0 +1,19 @@
+<ng-container *ngIf="!token">
+  <div class="card p-3 container w-50">
+    <div class="mb-3 row">
+      <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-10">
+        <input type="text"  readonly class="form-control" id="staticEmail" [ngModel]="loginRequest.username">
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+      <div class="col-sm-10">
+        <input type="password" readonly class="form-control" id="inputPassword" [ngModel]="loginRequest.password">
+      </div>
+    </div>
+    <div class="text-center">
+      <button type="button" class="btn btn-dark w-25" (click)="onLogin()">Login</button>
+    </div>
+  </div>
+</ng-container>
